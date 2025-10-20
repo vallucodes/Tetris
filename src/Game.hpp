@@ -6,7 +6,13 @@
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/System/Clock.hpp>
 #include <SFML/System/Time.hpp>
+#include <SFML/Window/Keyboard.hpp>
+
+#include <memory>
+
 #include "Constants.hpp"
+#include "InputHandler.hpp"
+#include "Point.hpp"
 
 class Game : public sf::Drawable
 {
@@ -29,20 +35,19 @@ class Game : public sf::Drawable
 		float&		getTimer();
 		float		getDelay();
 
+		void	keyPressed(sf::Keyboard::Key key);
+
 		void	newBlock(int& colorNum);
-		bool	check();
 		void	clearFullRows();
 
 	private:
 
+		std::unique_ptr<GameInput> m_pGameInput;
 		// game area
 		int m_field[M][N] = {0};
 
 		// block coordinates
-		struct Point
-		{
-			int x,y;
-		} a[4], b[4];
+		Point a[4], b[4];
 
 		// block shapes
 		int figures[7][4] =

@@ -117,6 +117,10 @@ float	Game::getDelay() {
 	return m_delay;
 }
 
+void	Game::keyPressed(sf::Keyboard::Key key) {
+	m_pGameInput->keyPressed(key);
+}
+
 void	Game::newBlock(int& colorNum) {
 	colorNum = 1 + rand() % 7;
 	// std::cout << "colorNum in Game: " << this->getColorNum() << std::endl;
@@ -131,70 +135,7 @@ void	Game::newBlock(int& colorNum) {
 }
 
 void	Game::updateBlockState() {
-	// move
-	for (int i = 0; i < 4; i++)
-	{
-		b[i] = a[i];
-		a[i].x += m_dx;
-	}
-	// check if side is hit
-	if (!check())
-	{
-		for (int i = 0; i < 4; i++)
-			a[i] = b[i];
-	}
-
-	// rotate
-	if (m_rotate)
-	{
-		Point p = a[1];
-		for (int i = 0; i < 4; i++)
-		{
-			int x = a[i].y - p.y;
-			int y = a[i].x - p.x;
-			a[i].x = p.x - x;
-			a[i].y = p.y + y;
-		}
-		if (!check())
-		{
-			for (int i = 0; i < 4; i++)
-				a[i] = b[i];
-		}
-	}
-
-	// tick
-	if (this->getTimer() > this->getDelay())
-	{
-		for (int i = 0; i < 4; i++)
-		{
-			b[i] = a[i];
-			a[i].y += 1;
-		}
-		// check if bottom is hit
-		if (!check())
-		{
-			for (int i = 0; i < 4; i++)
-				m_field[b[i].y][b[i].x] = m_colorNum;
-			clearFullRows();
-			this->newBlock(m_colorNum);
-		}
-		this->getTimer() = 0;
-	}
-
-	// reset helpers
-	m_dx = 0;
-	m_rotate = 0;
-}
-
-bool	Game::check() {
-	for (int i = 0; i < 4; i++)
-	{
-		if (a[i].x < 0 || a[i].x >= N || a[i].y >= M)
-			return 0;
-		else if (m_field[a[i].y][a[i].x])
-			return 0;
-	}
-	return 1;
+	m_pGameInput->update(a, b);
 }
 
 void	Game::clearFullRows() {

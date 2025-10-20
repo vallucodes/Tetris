@@ -1,6 +1,8 @@
 
 <!-- mighty todo list -->
 
+
+<!-- button instances to own class -->
 <!-- game ending -->
 <!-- background picture -->
 <!-- adjust starting pos x and y -->
