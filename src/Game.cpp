@@ -5,6 +5,7 @@
 
 Game::Game()
 {
+	m_pGameInput = std::make_unique<GameInput>(this);
 }
 
 Game::~Game()
@@ -119,6 +120,10 @@ float	Game::getDelay() {
 
 void	Game::keyPressed(sf::Keyboard::Key key) {
 	m_pGameInput->keyPressed(key);
+}
+
+int	(&Game::getField())[M][N] {
+	return m_field;
 }
 
 void	Game::newBlock(int& colorNum) {

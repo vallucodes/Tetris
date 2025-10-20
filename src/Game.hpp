@@ -34,6 +34,7 @@ class Game : public sf::Drawable
 		sf::Clock&	getClock();
 		float&		getTimer();
 		float		getDelay();
+		int			(&getField())[M][N];
 
 		void	keyPressed(sf::Keyboard::Key key);
 
@@ -43,6 +44,7 @@ class Game : public sf::Drawable
 	private:
 
 		std::unique_ptr<GameInput> m_pGameInput;
+
 		// game area
 		int m_field[M][N] = {0};
 

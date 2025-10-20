@@ -1,6 +1,7 @@
 #include "InputHandler.hpp"
+#include "Game.hpp"
 
-GameInput::GameInput() {}
+GameInput::GameInput(Game* pGame) : m_pGame(pGame) {}
 
 GameInput::~GameInput() {}
 
@@ -53,7 +54,7 @@ void	GameInput::move(Point (&a)[4], Point (&b)[4]) {
 	}
 
 	// tick
-	if (this->getTimer() > this->getDelay())
+	if (m_pGame->getTimer() > m_pGame->getDelay())
 	{
 		for (int i = 0; i < 4; i++)
 		{
@@ -61,14 +62,14 @@ void	GameInput::move(Point (&a)[4], Point (&b)[4]) {
 			a[i].y += 1;
 		}
 		// check if bottom is hit
-		if (!check())
+		if (!check(a, b))
 		{
 			for (int i = 0; i < 4; i++)
-				m_field[b[i].y][b[i].x] = m_colorNum;
-			clearFullRows();
-			this->newBlock(m_colorNum);
+				m_pGame->getField()[b[i].y][b[i].x] = m_pGame->getColorNum();
+			m_pGame->clearFullRows();
+			m_pGame->newBlock(m_pGame->getColorNum());
 		}
-		this->getTimer() = 0;
+		m_pGame->getTimer() = 0;
 	}
 
 	// reset helpers
@@ -82,13 +83,13 @@ bool	GameInput::check(Point (&a)[4], Point (&b)[4]) {
 	{
 		if (a[i].x < 0 || a[i].x >= N || a[i].y >= M)
 			return 0;
-		else if (m_field[a[i].y][a[i].x])
+		else if (m_pGame->getField()[a[i].y][a[i].x])
 			return 0;
 	}
 	return 1;
 }
 
 bool	InputData::hasInputs() {
-	return (m_rotate || m_left || m_right || m_down);
+	return (m_rotate || m_dx || m_down);
 }
 

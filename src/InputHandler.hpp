@@ -4,6 +4,8 @@
 #include "Point.hpp"
 #include "Constants.hpp"
 
+class Game;
+
 struct InputData
 {
 	bool m_rotate = false;
@@ -16,7 +18,7 @@ struct InputData
 class GameInput
 {
 	public:
-		GameInput();
+		GameInput(Game* pGame);
 		~GameInput();
 
 		void	keyPressed(sf::Keyboard::Key key);
@@ -25,5 +27,6 @@ class GameInput
 		bool	check(Point (&a)[4], Point (&b)[4]);
 
 	private:
+		Game*		m_pGame;
 		InputData	m_inputData;
 };
