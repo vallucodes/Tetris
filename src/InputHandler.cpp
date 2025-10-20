@@ -1,6 +1,8 @@
 #include "InputHandler.hpp"
 #include "Game.hpp"
 
+#include <iostream>
+
 GameInput::GameInput(Game* pGame) : m_pGame(pGame) {}
 
 GameInput::~GameInput() {}
@@ -17,8 +19,7 @@ void	GameInput::keyPressed(sf::Keyboard::Key key) {
 }
 
 void	GameInput::update(Point (&a)[4], Point (&b)[4]) {
-	if (m_inputData.hasInputs())
-		move(a, b);
+	move(a, b);
 }
 
 void	GameInput::move(Point (&a)[4], Point (&b)[4]) {
@@ -71,6 +72,8 @@ void	GameInput::move(Point (&a)[4], Point (&b)[4]) {
 		}
 		m_pGame->getTimer() = 0;
 	}
+
+	std::cout << "dx: " << m_inputData.m_dx << std::endl;
 
 	// reset helpers
 	m_inputData.m_dx = 0;

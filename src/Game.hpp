@@ -28,8 +28,6 @@ class Game : public sf::Drawable
 		const sf::Font& getFont() const;
 		const sf::Texture& getTiles() const;
 		int			(&getFigures())[7][4];
-		int&		getDx();
-		bool&		getRotate();
 		int&		getColorNum();
 		sf::Clock&	getClock();
 		float&		getTimer();
@@ -69,8 +67,8 @@ class Game : public sf::Drawable
 		sf::Clock	m_clock;
 
 		// sprite movement
-		int		m_dx = 0;
-		bool	m_rotate = 0;
+		// int		m_dx = 0;
+		// bool	m_rotate = 0;
 		int		m_colorNum = 1;
 
 		// sprite textures and fonts

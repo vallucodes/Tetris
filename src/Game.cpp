@@ -94,14 +94,6 @@ int	(&Game::getFigures())[7][4] {
 	return figures;
 }
 
-int&	Game::getDx() {
-	return m_dx;
-}
-
-bool&	Game::getRotate() {
-	return m_rotate;
-}
-
 int&	Game::getColorNum() {
 	return m_colorNum;
 }

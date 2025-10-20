@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
 				window.close();
 			if (event.type == sf::Event::KeyPressed) {
 				if (event.key.code == sf::Keyboard::Up)
-					pGame.getRotate() = true;
+					pGame.keyPressed(event.key);
 				else if (event.key.code == sf::Keyboard::Left)
 					pGame.getDx() = -1;
 				else if (event.key.code == sf::Keyboard::Right)
